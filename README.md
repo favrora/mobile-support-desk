@@ -1,56 +1,70 @@
-# Welcome to your Expo app 👋
+# RelayDesk Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+[![CI](https://github.com/favrora/mobile-support-desk/actions/workflows/ci.yml/badge.svg)](https://github.com/favrora/mobile-support-desk/actions/workflows/ci.yml)
+![Expo SDK 57](https://img.shields.io/badge/Expo%20SDK-57-000020)
+![React Native 0.86](https://img.shields.io/badge/React%20Native-0.86-315CB5)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-087A59)
 
-## Get started
+RelayDesk is a production-style support operations workspace for Android, iOS, and the web. It
+demonstrates responsive React Native architecture, deterministic state transitions, offline
+persistence, accessibility, and operational UI design without relying on a backend.
 
-1. Install dependencies
+![RelayDesk support inbox](docs/relaydesk-inbox.png)
 
-   ```bash
-   npm install
-   ```
+<details>
+  <summary>Queue insights</summary>
 
-2. Start the app
+  ![RelayDesk queue insights](docs/relaydesk-insights.png)
+</details>
 
-   ```bash
-   npx expo start
-   ```
+## Product surface
 
-In the output, you'll find options to open the app in a
+- Prioritized support queue with full-text search and status filters
+- SLA countdowns, overdue states, channels, tags, and ownership
+- Conversation history with system diagnostics and agent replies
+- Context-aware local reply drafts with transparent demo labeling
+- Queue health, workload, response-time, and status insights
+- Compact mobile navigation and side-by-side desktop workflow
+- Local persistence through AsyncStorage
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+All people, messages, and operational metrics are fictional seed data. The app sends no customer
+data to a remote service.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Architecture
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+src/app                 Expo Router entry points
+src/screens             Responsive screen composition
+src/components          Reusable accessible UI controls
+src/features/tickets    Domain model, reducer, selectors, storage, and feature UI
+src/theme.ts            Shared visual tokens
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Business rules are framework-independent functions in `logic.ts`. React owns orchestration,
+AsyncStorage is isolated behind a small adapter, and the view switches between compact and desktop
+layouts without duplicating domain state. See [ARCHITECTURE.md](ARCHITECTURE.md) for the decisions and
+tradeoffs.
 
-### Other setup steps
+## Run locally
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Requires Node.js 20 or newer.
 
-## Learn more
+```bash
+npm ci
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Use `npm run android`, `npm run ios`, or `npm run web` for a specific platform.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Quality gates
 
-## Join the community
+```bash
+npm run check
+```
 
-Join our community of developers creating universal apps.
+The check pipeline runs Expo ESLint, strict TypeScript validation, Vitest domain tests, and a static
+web export. The same pipeline runs in GitHub Actions for every push and pull request.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## License
+
+[MIT](LICENSE)
