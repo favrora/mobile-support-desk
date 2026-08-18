@@ -9,6 +9,8 @@ RelayDesk is a production-style support operations workspace for Android, iOS, a
 demonstrates responsive React Native architecture, deterministic state transitions, offline
 persistence, accessibility, and operational UI design without relying on a backend.
 
+[Open the live web demo](https://favrora.github.io/mobile-support-desk/)
+
 ![RelayDesk support inbox](docs/relaydesk-inbox.png)
 
 <details>
